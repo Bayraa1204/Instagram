@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const dotenv = require("dotenv");
 const userRoute = require("./Routes/userRoute");
 const postRoute = require("./Routes/postRoute");
@@ -8,6 +9,14 @@ const likeRoute = require("./Routes/likeRoute");
 const app = express();
 app.use(express.json());
 dotenv.config();
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type, Authorization",
+  })
+);
 
 const connectToDB = async () => {
   res = await mongoose.connect(process.env.MONGODB_URI);
