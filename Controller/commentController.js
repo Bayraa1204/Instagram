@@ -37,7 +37,7 @@ const getOnlyOnePostComments = async (req, res) => {
   try {
     const { postId } = req.body;
     const post = await commentModel
-      .findOne({ postId: postId })
+      .find({ postId: postId })
       .populate("userId", "username profileImg");
     res.status(200).send(post);
   } catch (error) {
