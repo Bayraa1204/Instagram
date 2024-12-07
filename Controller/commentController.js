@@ -33,6 +33,17 @@ const getComment = async (req, res) => {
     res.status(500).json(error);
   }
 };
+const getOnlyOnePostComments = async (req, res) => {
+  try {
+    const { postId } = req.body;
+    const post = await commentModel
+      .findOne({ _id: postId })
+      .populate("userId", "username profileImg");
+    res.status(200).send(post);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
 const editComment = async (req, res) => {
   const { commentId, comment } = req.body;
@@ -64,4 +75,10 @@ const deleteComment = async (req, res) => {
     res.status(500).json(error);
   }
 };
-module.exports = { createComment, getComment, editComment, deleteComment };
+module.exports = {
+  createComment,
+  getComment,
+  editComment,
+  deleteComment,
+  getOnlyOnePostComments,
+};
