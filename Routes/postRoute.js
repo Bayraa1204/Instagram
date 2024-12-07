@@ -10,6 +10,6 @@ const postRoute = Router();
 postRoute.post("/createPost", createPost);
 postRoute.get("/getPost", getPosts);
 postRoute.post("/getOnlyOnePost", getOnlyOnePost);
-postRoute.post("/getOnlyOnePost", getOnlyOnePostComments);
+postRoute.post("/getOnlyOnePostComments", getOnlyOnePostComments);
 
 module.exports = postRoute;
