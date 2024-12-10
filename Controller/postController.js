@@ -52,7 +52,14 @@ const getOnlyOnePost = async (req, res) => {
 const getPostComments = async (req, res) => {
   try {
     const { idPost } = req.query;
-    const post = await postModel.findById(idPost)
+    console.log(idPost)
+    const post = await postModel.find(idPost).populate({
+      path: "comments",
+      populate: {
+        path: "userId",
+        select: "username profileImg",
+      },
+    });
     res.send(post);
   } catch (error) {
     res.status(500).json(error);
