@@ -53,7 +53,7 @@ const getPostComments = async (req, res) => {
   try {
     const { idPost } = req.params;
     console.log(idPost)
-    const post = await postModel.find(idPost).populate({
+    const post = await postModel.findById(idPost).populate({
       path: "comments",
       populate: {
         path: "userId",
