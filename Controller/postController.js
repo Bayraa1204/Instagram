@@ -52,7 +52,6 @@ const getOnlyOnePost = async (req, res) => {
 const getPostComments = async (req, res) => {
   try {
     const { idPost } = req.params;
-    console.log(idPost)
     const post = await postModel.findById(idPost).populate({
       path: "comments",
       populate: {
@@ -65,17 +64,6 @@ const getPostComments = async (req, res) => {
     res.status(500).json(error);
   }
 };
-// const getOnlyOnePostComments = async (req, res) => {
-//   try {
-//     const { postId } = req.body;
-//     const post = await postModel
-//       .findOne({ _id: postId })
-//       .populate("comments like", "userId comment");
-//     res.status(200).send(post.comments);
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// };
 
 module.exports = {
   createPost,
