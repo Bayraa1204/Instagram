@@ -1,22 +1,59 @@
 const bcrypt = require("bcrypt");
 const userModel = require("../Model/userSchema");
-const postModel = require("../Model/postSchema");
+const jwt = require("jsonwebtoken");
+const authMiddleware = require("../authMiddleware");
 
 const signup = async (req, res) => {
   try {
     const { username, password, email, profileImg } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 5);
-    const newUserBody = {
+    const newUser = {
       username,
       password: hashedPassword,
       email,
       profileImg,
     };
-    const response = await userModel.create(newUserBody);
-    res.send(response);
+    const response = await userModel.create(newUser);
+    var token = jwt.sign({ userId: response._id }, process.env.JWT_SECRET, {
+      expiresIn: "24h",
+    });
+    res.send({
+      token,
+    });
   } catch (error) {
     console.log(error);
     res.send(`error => ${error}`);
+  }
+};
+
+const logIn = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email });
+    const itIsValidPass = await bcrypt.compare(password, user.password);
+    if (!user) {
+      res.status(400).send({ message: "User Not Found" });
+    }
+    if (!itIsValidPass) {
+      res.status(400).send({ message: "The password or email doesn't match" });
+    }
+    if (user && itIsValidPass) {
+      const token = jwt.sign(
+        {
+          id: user._id,
+          username: user.username,
+          password: user.password,
+          email: user.email,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "24h",
+        }
+      );
+      res.send({ token });
+    }
+  } catch (error) {
+    res.send(error);
   }
 };
 
@@ -110,4 +147,11 @@ const getOneUserInfo = async (req, res) => {
   }
 };
 
-module.exports = { signup, getUsers, followUser, unFollowUser, getOneUserInfo };
+module.exports = {
+  signup,
+  getUsers,
+  followUser,
+  unFollowUser,
+  getOneUserInfo,
+  logIn,
+};
