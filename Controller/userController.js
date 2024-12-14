@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const userModel = require("../Model/userSchema");
 const jwt = require("jsonwebtoken");
-const authMiddleware = require("../authMiddleware");
 
 const signup = async (req, res) => {
   try {
