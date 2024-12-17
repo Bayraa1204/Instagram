@@ -6,12 +6,17 @@ const {
   deleteComment,
   getOnlyOnePostComments,
 } = require("../Controller/commentController");
+const authMiddleware = require("../authMiddleware");
 const commentRoute = Router();
 
-commentRoute.post("/createComment", createComment);
-commentRoute.get("/getComments", getComment);
-commentRoute.post("/editComment", editComment);
-commentRoute.post("/getOnlyOnePostComments", getOnlyOnePostComments);
-commentRoute.delete("/deleteComment", deleteComment);
+commentRoute.post("/createComment", authMiddleware, createComment);
+commentRoute.get("/getComments", authMiddleware, getComment);
+commentRoute.post("/editComment", authMiddleware, editComment);
+commentRoute.post(
+  "/getOnlyOnePostComments",
+  authMiddleware,
+  getOnlyOnePostComments
+);
+commentRoute.delete("/deleteComment", authMiddleware, deleteComment);
 
 module.exports = commentRoute;

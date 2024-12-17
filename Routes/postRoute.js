@@ -5,11 +5,12 @@ const {
   getOnlyOnePost,
   getPostComments,
 } = require("../Controller/postController");
+const authMiddleware = require("../authMiddleware");
 const postRoute = Router();
 
-postRoute.post("/createPost", createPost);
-postRoute.get("/getPost", getPosts);
-postRoute.post("/getOnlyOnePost", getOnlyOnePost);
-postRoute.get("/:idPost", getPostComments);
+postRoute.post("/createPost", authMiddleware, createPost);
+postRoute.get("/getPost", authMiddleware, getPosts);
+postRoute.post("/getOnlyOnePost", authMiddleware, getOnlyOnePost);
+postRoute.get("/:idPost", authMiddleware, getPostComments);
 
 module.exports = postRoute;
