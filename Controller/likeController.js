@@ -3,7 +3,7 @@ const postModel = require("../Model/postSchema");
 const likePost = async (req, res) => {
   const { userId, postId } = req.body;
   try {
-    await postModel.findByIdAndUpdate(
+    const response = await postModel.findByIdAndUpdate(
       postId,
       {
         $addToSet: {
@@ -12,7 +12,7 @@ const likePost = async (req, res) => {
       },
       { new: true }
     );
-    res.status(200).send("liked");
+    res.status(200).send(response);
   } catch (error) {
     res.status(500).json(error);
   }

@@ -13,7 +13,7 @@ const signup = async (req, res) => {
       profileImg,
     };
     const response = await userModel.create(newUser);
-    var token = jwt.sign({ userId: response._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: response._id }, process.env.JWT_SECRET, {
       expiresIn: "24h",
     });
     res.send({
