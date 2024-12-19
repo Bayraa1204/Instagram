@@ -19,13 +19,14 @@ const likePost = async (req, res) => {
   }
 };
 const disableLike = async (req, res) => {
-  const { likeId, postId } = req.body;
+  const { userId } = req.userId;
+  const { postId } = req.body;
   try {
     await postModel.findByIdAndUpdate(
       postId,
       {
         $pull: {
-          like: likeId,
+          like: userId,
         },
       },
       { new: true }
