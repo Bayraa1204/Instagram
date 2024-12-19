@@ -1,7 +1,8 @@
 const postModel = require("../Model/postSchema");
 
 const likePost = async (req, res) => {
-  const { userId, postId } = req.body;
+  const { userId } = req.userId;
+  const { postId } = req.body;
   try {
     const response = await postModel.findByIdAndUpdate(
       postId,
