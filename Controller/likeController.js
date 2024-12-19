@@ -2,7 +2,7 @@ const postModel = require("../Model/postSchema");
 
 const likePost = async (req, res) => {
   const userId = req.userId;
-  const postId = req.body;
+  const { postId } = req.body;
   try {
     const response = await postModel.findByIdAndUpdate(postId, {
       $addToSet: {
@@ -16,7 +16,7 @@ const likePost = async (req, res) => {
 };
 const disableLike = async (req, res) => {
   const userId = req.userId;
-  const postId = req.body;
+  const { postId } = req.body;
   try {
     await postModel.findByIdAndUpdate(postId, {
       $pull: {
