@@ -13,7 +13,7 @@ const userRoute = Router();
 userRoute.post("/signup", signup)
 userRoute.post("/logIn", logIn);;
 userRoute.get("/getUsers", authMiddleware, getUsers);
-userRoute.post("/getOneUserInfo", authMiddleware, getOneUserInfo);
+userRoute.post("/:idPost", authMiddleware, getOneUserInfo);
 userRoute.post("/followUser", authMiddleware, followUser);
 userRoute.delete("/unFollowUser", authMiddleware, unFollowUser);
 

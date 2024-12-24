@@ -124,9 +124,9 @@ const unFollowUser = async (req, res) => {
   }
 };
 const getOneUserInfo = async (req, res) => {
-  const body = req.body;
+  const { idPost } = req.params;
   try {
-    const response = await userModel.findOne({ _id: body.userId }).populate([
+    const response = await userModel.findOne({ _id: idPost }).populate([
       {
         path: "posts",
         populate: [
