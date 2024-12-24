@@ -3,7 +3,8 @@ const postModel = require("../Model/postSchema");
 
 const createComment = async (req, res) => {
   try {
-    const { userId, postId, comment } = req.body;
+    const userId = req.userId;
+    const { postId, comment } = req.body;
     const commentCreate = await commentModel.create({
       userId,
       postId,
