@@ -1,11 +1,11 @@
 const Router = require("express");
 const {
+  logIn,
   signup,
   getUsers,
   followUser,
   unFollowUser,
   getOneUserInfo,
-  logIn,
 } = require("../Controller/userController");
 const authMiddleware = require("../authMiddleware");
 const userRoute = Router();
