@@ -39,7 +39,7 @@ const getPosts = async (req, res) => {
 
 const getOnlyOnePost = async (req, res) => {
   try {
-    const { postId } = req.body;
+    const { postId } = req.params;
     const post = await postModel
       .findOne({ _id: postId })
       .populate("comments like", "userId comment");

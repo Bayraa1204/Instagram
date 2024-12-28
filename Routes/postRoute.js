@@ -10,7 +10,7 @@ const postRoute = Router();
 
 postRoute.post("/createPost", authMiddleware, createPost);
 postRoute.get("/getPost", authMiddleware, getPosts);
-postRoute.post("/getOnlyOnePost", authMiddleware, getOnlyOnePost);
+postRoute.get("/:postId", authMiddleware, getOnlyOnePost);
 postRoute.get("/:idPost", authMiddleware, getPostComments);
 
 module.exports = postRoute;

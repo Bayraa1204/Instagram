@@ -24,8 +24,8 @@ const connectToDB = async () => {
 };
 connectToDB();
 
-app.use("/user",userRoute);
-app.use(postRoute);
+app.use("/user", userRoute);
+app.use("/post", postRoute);
 app.use(commentRoute);
 app.use(likeRoute);
 
