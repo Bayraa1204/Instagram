@@ -40,9 +40,15 @@ const getPosts = async (req, res) => {
 const getOnlyOnePost = async (req, res) => {
   try {
     const { postId } = req.params;
-    const post = await postModel
-      .findOne({ _id: postId })
-      .populate("comments like", "userId comment");
+    const post = await postModel.findOne({ _id: postId }).populate([
+      { path: "userId", select: "username email profileImg" },
+      { path: "like", select: "username email profileImg" },
+      {
+        path: "comments",
+        select: "comment userId",
+        populate: { path: "userId", select: "username email profileImg" },
+      },
+    ]);
     res.status(200).send(post);
   } catch (error) {
     res.status(500).json(error);
