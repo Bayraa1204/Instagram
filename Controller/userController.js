@@ -94,7 +94,8 @@ const followUser = async (req, res) => {
 };
 
 const unFollowUser = async (req, res) => {
-  const { userId, _id } = req.body;
+  const _id = req.userId;
+  const { userId } = req.body;
   const isFollowing = await userModel.find({ _id: _id, following: userId });
   if (isFollowing) {
     try {
