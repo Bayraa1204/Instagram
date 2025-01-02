@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const userModel = require("../Model/userSchema");
 const jwt = require("jsonwebtoken");
+const { path } = require("../Routes/userRoute");
+const { populate } = require("dotenv");
 
 const signup = async (req, res) => {
   try {
@@ -140,6 +142,18 @@ const getOneUserInfo = async (req, res) => {
             populate: { path: "userId", select: "username email profileImg" },
           },
         ],
+      },
+      {
+        path: "followers",
+        populate: {
+          path: "_id",
+        },
+      },
+      {
+        path: "following",
+        populate: {
+          path: "_id",
+        },
       },
     ]);
     res.send(response);
