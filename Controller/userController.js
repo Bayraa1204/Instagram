@@ -39,7 +39,7 @@ const logIn = async (req, res) => {
       res.status(400).send({ message: "The password or email doesn't match" });
     }
     if (user && itIsValidPass) {
-      const token = jwt.sign({ userId: response._id }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
         expiresIn: "24h",
       });
       res.send({ token });
