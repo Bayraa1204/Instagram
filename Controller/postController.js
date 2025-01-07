@@ -24,7 +24,7 @@ const getPosts = async (req, res) => {
   try {
     const posts = await postModel.find().populate([
       { path: "userId", select: "username email profileImg" },
-      { path: "like", select: "username email profileImg" },
+      { path: "like" },
       {
         path: "comments",
         select: "comment userId",
