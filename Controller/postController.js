@@ -3,7 +3,8 @@ const userModel = require("../Model/userSchema");
 
 const createPost = async (req, res) => {
   try {
-    const { caption, postImg, userId } = req.body;
+    const userId = req.userId;
+    const { caption, postImg } = req.body;
     const postCreate = await postModel.create({
       caption,
       postImg,
