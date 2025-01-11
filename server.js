@@ -13,7 +13,7 @@ dotenv.config();
 app.use(
   cors({
     origin: [
-      "https://instagram-front-end-f9gz.vercel.app ",
+      "https://instagram-front-end-f9gz.vercel.app",
       "http://localhost:3000",
     ],
     methods: "GET,POST,PUT,DELETE",
