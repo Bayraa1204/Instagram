@@ -12,7 +12,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: "https://instagram-front-end-f9gz.vercel.app/",
+    origin: "https://instagram-front-end-f9gz.vercel.app",
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type, Authorization",
   })
